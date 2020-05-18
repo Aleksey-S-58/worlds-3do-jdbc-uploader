@@ -7,7 +7,7 @@
 
 	<groupId>com.gmail.ascanada52</groupId>
 	<artifactId>worlds-3do-jdbc-uploader</artifactId>
-	<version>1.0.0.alpha-RELEASE</version>
+	<version>1.0.1</version>
 	<name>object-uploader</name>
 	<packaging>jar</packaging>
 	
@@ -18,7 +18,7 @@
 		<!-- -->
 		<spring-version>5.1.2.RELEASE</spring-version>
 		<jetty.version>9.2.5.v20141112</jetty.version>
-		<hibernate.version>4.3.10.Final</hibernate.version>
+		<hibernate.version>5.2.17.Final</hibernate.version>
 		<!-- Database -->
 		<jdbc.url>jdbc:postgresql://localhost/map</jdbc.url>
 	    <jdbc.user>map_api</jdbc.user>
@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>com.gmail.ascanada52</groupId>
 			<artifactId>object-loader</artifactId>
-			<version>1.0.0.alpha-RELEASE</version>
+			<version>1.0.1</version>
 		</dependency>
 		<!-- Spring -->
 		<dependency>

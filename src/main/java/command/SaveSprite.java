@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import data.Sprite;
 import loader.SpriteLoader;
-import service.database.object.loader.ObjectService;
+import service.database.object.loader.DataService;
 
 /**
  * This command is intended to save a sprite to a database.
@@ -17,19 +17,17 @@ public class SaveSprite implements Command {
 	private static final Logger LOGGER  = LoggerFactory.getLogger(SaveSprite.class);
 	
 	private SpriteLoader loader;
-	private ObjectService service;
+	private DataService service;
 	private String name;
 	private String spritePath;
 
-	public SaveSprite(SpriteLoader loader, ObjectService service, String name, String spritePath) {
+	public SaveSprite(SpriteLoader loader, DataService service, String name, String spritePath) {
 		super();
 		this.loader = loader;
 		this.service = service;
 		this.name = name;
 		this.spritePath = spritePath;
 	}
-
-
 
 	@Override
 	public boolean execute() {

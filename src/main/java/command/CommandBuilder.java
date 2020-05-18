@@ -1,9 +1,10 @@
 package command;
 
+import loader.CustomObjectLoader;
 import loader.GeometryLoader;
 import loader.MaterialLoader;
 import loader.SpriteLoader;
-import service.database.object.loader.ObjectService;
+import service.database.object.loader.DataService;
 
 /**
  * This command builder allows to create either 
@@ -16,12 +17,15 @@ public class CommandBuilder {
 	private GeometryLoader geometryLoader;
 	private MaterialLoader materialLoader;
 	private SpriteLoader spriteLoader;
-	private ObjectService service;
+	private CustomObjectLoader customObjectLoader;
+	private DataService service;
 	private String name;
 	private String geometryPath;
 	private String materialPath;
 	private String spritePath;
-	
+	private String customObjectPath;
+	private String tableName;
+
 	public void setGeometryLoader(GeometryLoader geometryLoader) {
 		this.geometryLoader = geometryLoader;
 	}
@@ -31,7 +35,10 @@ public class CommandBuilder {
 	public void setSpriteLoader(SpriteLoader spriteLoader) {
 		this.spriteLoader = spriteLoader;
 	}
-	public void setService(ObjectService service) {
+	public void setCustomObjectLoader(CustomObjectLoader customObjectLoader) {
+		this.customObjectLoader = customObjectLoader;
+	}
+	public void setService(DataService service) {
 		this.service = service;
 	}
 	public void setName(String name) {
@@ -46,7 +53,13 @@ public class CommandBuilder {
 	public void setSpritePath(String spritePath) {
 		this.spritePath = spritePath;
 	}
-	
+	public void setCustomObjectPath(String path) {
+		customObjectPath = path;
+	}
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
 	/**
 	 * Creates a ready to execute command according to a specified class type.
 	 * If some of demanded properties was not specified an IllegalArgumentException will be thrown!
@@ -60,9 +73,12 @@ public class CommandBuilder {
 		if (clazz == SaveSprite.class) {
 			return buildSaveSprite();
 		}
+		if (clazz == SaveCustomObject.class) {
+			return buildSaveCustomObject();
+		}
 		throw new IllegalArgumentException("Unsupported command type!");
 	}
-	
+
 	private SaveObject buildSaveObject() {
 		if (geometryLoader == null || materialLoader == null 
 				|| service == null || name == null || geometryPath == null 
@@ -71,11 +87,18 @@ public class CommandBuilder {
 		}
 		return new SaveObject(geometryLoader, materialLoader, service, name, geometryPath, materialPath);
 	}
-	
+
 	private SaveSprite buildSaveSprite() {
 		if (spriteLoader == null || service == null || name == null || spritePath == null) {
 			throw new IllegalArgumentException("spriteLoader, service, name, spritePath can't be null!");
 		}
 		return new SaveSprite(spriteLoader, service, name, spritePath);
+	}
+
+	private SaveCustomObject buildSaveCustomObject() {
+		if (customObjectLoader == null || service == null || name == null || customObjectPath == null || tableName == null) {
+			throw new IllegalArgumentException("customObjectLoader, service, name, customObjectPath, tableName can't be null!");
+		}
+		return new SaveCustomObject(customObjectLoader, service, name, tableName, customObjectPath);
 	}
 }
