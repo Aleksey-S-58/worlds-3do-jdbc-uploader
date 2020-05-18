@@ -7,7 +7,7 @@ import data.Geometry;
 import data.Material;
 import loader.GeometryLoader;
 import loader.MaterialLoader;
-import service.database.object.loader.ObjectService;
+import service.database.object.loader.DataService;
 
 /**
  * This command is intended to save a 3DO to a database.
@@ -20,13 +20,13 @@ public class SaveObject implements Command {
 	
 	private GeometryLoader geometryLoader;
 	private MaterialLoader materialLoader;
-	private ObjectService service;
+	private DataService service;
 	private String name;
 	private String geometryPath;
 	private String materialPath;
 
 	public SaveObject(GeometryLoader geometryLoader, MaterialLoader materialLoader, 
-			ObjectService service, String name, String geometryPath, String materialPath) {
+			DataService service, String name, String geometryPath, String materialPath) {
 		super();
 		this.geometryLoader = geometryLoader;
 		this.materialLoader = materialLoader;

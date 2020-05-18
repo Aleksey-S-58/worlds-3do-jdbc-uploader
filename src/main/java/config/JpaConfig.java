@@ -17,7 +17,6 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * 
@@ -76,7 +75,7 @@ public class JpaConfig {
 	}
 
 	@Bean(name = "transactionManager")
-	public PlatformTransactionManager getTransactionManager(EntityManagerFactory emf) {
+	public JpaTransactionManager getTransactionManager(EntityManagerFactory emf) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(emf);
 		return transactionManager;
